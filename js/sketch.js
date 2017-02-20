@@ -4,12 +4,13 @@
 })();
 var gamelevelx = 85;
 var gamelevely = 95;
-var gamelevel = 2;
+var gamelevel = 1;
 var startlength = 80;
 
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
-    width = window.innerWidth - 2,
+    
+    width = 200,
     height = 200,
     startheight = -height,
     player = {
@@ -17,7 +18,7 @@ var canvas = document.getElementById("canvas"),
         y: height - 15,
         width: 5,
         height: 5,
-        speed: 2.5,
+        speed: 2.75,
         velX: 0,
         velY: 0,
         jumping: false,
@@ -74,11 +75,17 @@ function checkobstacles(level){
 
 if(level == 1){
     newlevel();
-    win.x = 85
-    win.y = 95
+    win.x = 75
+    win.y = 115
     boxes.push({
         x: 70,
-        y: height-30,
+        y: height-20,
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: 55,
+        y: height-35,
         width: 10,
         height: 5
     });
@@ -95,20 +102,20 @@ if(level == 1){
         height: 5
     });
     boxes.push({
-        x: 60,
-        y: height-100,
+        x: 50,
+        y: height-80,
         width: 30,
         height: 5
     });
-        boxes.push({
-            x: 90,
-            y: 95,
-            width: 1,
-            height: 5
-        });
 
 } else if (level == 2){
     newlevel();
+    boxes.push({
+        x: startlength+115,
+        y: 30,
+        width: 5,
+        height: height-30
+    }); 
     boxes.push({
         x: startlength+20,
         y: height-20,
@@ -117,7 +124,7 @@ if(level == 1){
 
     });   
     boxes.push({
-        x: startlength+85,
+        x: startlength+75,
         y: height-30,     
         width: 30,
         height: 5
@@ -129,23 +136,67 @@ if(level == 1){
         height: 5
     });   
     boxes.push({
-        x: startlength+35,
+        x: startlength+25,
         y: height-50,     
-        width: 10,
+        width: 20,
         height: 5
     });  
-
-
+    boxes.push({
+        x: startlength+85,
+        y: height-30,
+        width: 30,
+        height: 5
+    });
+    boxes.push({
+            x: startlength-15,
+            y: height-50,     
+            width: 20,
+            height: 5
+        });
+    boxes.push({
+        x: startlength-35,
+        y: height-65,     
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: startlength-75,
+        y: height-100,     
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: startlength-55,
+        y: height-85,     
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: startlength-60,
+        y: height-115,     
+        width: 10,
+        height: 5
+    });
+      boxes.push({
+        x: startlength-20,
+        y: height-115,     
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: startlength+25,
+        y: height-95,     
+        width: 30,
+        height: 5
+    });
         boxes.push({
-            x: startlength+85,
-            y: height-30,
-
+            x: startlength+25,
+            y: height-95,     
             width: 30,
             height: 5
         });
-
-    win.x = startlength+95;
-    win.y = height-35;
+    win.x = 125;
+    win.y = 100;
 
 
 //    win.x = 10;
@@ -163,11 +214,11 @@ canvas.height = height;
 
 function update() {
 
-    if( Math.round(player.x) == win.x  || player.x+5 > win.x > player.x-5 && player.y == win.y ){
-        console.log("win");
-
-        checkobstacles(++gamelevel);
-
+    if(  win.y == player.y){
+        if( player.x-5 > win.x || win.x< player.x+5 ){
+                    console.log("win");
+                    checkobstacles(++gamelevel);
+        }
     }
 
     // check keys
