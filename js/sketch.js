@@ -135,7 +135,7 @@ if(level == 1){
         height: 5
     });  
 
-    });
+
         boxes.push({
             x: startlength+85,
             y: height-30,
