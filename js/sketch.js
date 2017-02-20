@@ -2,11 +2,16 @@
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
 })();
+var gamelevelx = 85;
+var gamelevely = 95;
+var gamelevel = 2;
+var startlength = 80;
 
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
     width = window.innerWidth - 2,
     height = 200,
+    startheight = -height,
     player = {
         x: width / width + 20,
         y: height - 15,
@@ -18,77 +23,131 @@ var canvas = document.getElementById("canvas"),
         jumping: false,
         grounded: false
     },
+    win = {
+        x: gamelevelx,
+        y: gamelevely
+    },
     keys = [],
-    friction = 0.8,
+    friction = 0.7,
     gravity = 0.5;
+    var boxes = [];
+function createboundaries(){
 
-var boxes = [];
-
-// dimensions
-
-//boundaries
-boxes.push({
-    x: 0,
-    y: 0,
-    width: 10,
-    height: height
-});
-boxes.push({
-    x: 0,
-    y: -height - 2,
-    width: width,
-    height: 50
-});
-boxes.push({
-    x: 0,
-    y: height - 2,
-    width: 80,
-    height: 50
-});
-boxes.push({
-    x: width - 10,
-    y: 0,
-    width: 0,
-    height: height
-});
-
-
+    //boundaries
+    boxes.push({
+        x: 0,
+        y: 0,
+        width: 10,
+        height: height
+    });
+    boxes.push({
+        x: 0,
+        y: -height - 2,
+        width: width,
+        height: 50
+    });
+    boxes.push({
+        x: 0,
+        y: height - 2,
+        width: startlength,
+        height: 50
+    });
+    boxes.push({
+        x: width - 10,
+        y: 0,
+        width: 10,
+        height: height
+    });
+}
+function newlevel(){
+    boxes = [];
+    createboundaries();
+    player.x = width / width + 20;
+    player.y= height - 15;
+}
 
 //obstacles
-boxes.push({
-    x: 70,
-    y: height-30,
-    width: 10,
-    height: 5
-});
 
-boxes.push({
-    x: 40,
-    y: height-50,
-    width: 10,
-    height: 5
-});
-boxes.push({
-    x: 20,
-    y: height-70,
-    width: 10,
-    height: 5
-});
-boxes.push({
-    x: 60,
-    y: height-100,
-    width: 30,
-    height: 5
-});
+function checkobstacles(level){
+        // Blue rectangle
 
 
+if(level == 1){
+    newlevel();
+    win.x = 85
+    win.y = 95
+    boxes.push({
+        x: 70,
+        y: height-30,
+        width: 10,
+        height: 5
+    });    
+    boxes.push({
+        x: 40,
+        y: height-50,
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: 20,
+        y: height-70,
+        width: 10,
+        height: 5
+    });
+    boxes.push({
+        x: 60,
+        y: height-100,
+        width: 30,
+        height: 5
+    }); 
+        boxes.push({
+            x: 90,
+            y: 95,
+            width: 1,
+            height: 5
+        }); 
+    
+} else if (level == 2){
+    newlevel();
+    boxes.push({
+        x: startlength+20,
+        y: height-20,
+        width: 20,
+        height: 5
+    });   
+        boxes.push({
+            x: startlength+85,
+            y: height-30,
+            
+            width: 30,
+            height: 5
+        });   
+    win.x = startlength+95;
+    win.y = height-35;
+    
+    
+//    win.x = 10; 
 
+}
 
-
+}
 canvas.width = width;
 canvas.height = height;
 
+
+
+
+
+
 function update() {
+    
+    if( Math.round(player.x) == win.x  || player.x+5 > win.x > player.x-5 && player.y == win.y ){
+        console.log("win");
+        
+        checkobstacles(++gamelevel);
+        
+    }
+            
     // check keys
     if (keys[38] || keys[32] || keys[87]) {
         // up arrow or space
@@ -146,6 +205,10 @@ function update() {
     ctx.fill();
     ctx.fillStyle = "red";
     ctx.fillRect(player.x, player.y, player.width, player.height);
+    
+    
+    ctx.fillStyle = "blue";
+    ctx.fillRect(win.x, win.y, player.width, player.height);
 
     requestAnimationFrame(update);
     
@@ -202,4 +265,5 @@ document.body.addEventListener("keyup", function (e) {
 
 window.addEventListener("load", function () {
     update();
+    checkobstacles(gamelevel);
 });
