@@ -4,7 +4,7 @@
 })();
 var gamelevelx = 85;
 var gamelevely = 95;
-var gamelevel = 1;
+var gamelevel = 2;
 var startlength = 80;
 
 var canvas = document.getElementById("canvas"),
@@ -115,13 +115,24 @@ if(level == 1){
         width: 20,
         height: 5
     });   
-        boxes.push({
-            x: startlength+85,
-            y: height-30,
-            
-            width: 30,
-            height: 5
-        });   
+    boxes.push({
+        x: startlength+85,
+        y: height-30,     
+        width: 30,
+        height: 5
+    });   
+    boxes.push({
+        x: startlength+85,
+        y: height-50,     
+        width: 10,
+        height: 5
+    });   
+    boxes.push({
+        x: startlength+35,
+        y: height-50,     
+        width: 10,
+        height: 5
+    });  
     win.x = startlength+95;
     win.y = height-35;
     
