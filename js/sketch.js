@@ -28,7 +28,7 @@ var canvas = document.getElementById("canvas"),
         y: gamelevely
     },
     keys = [],
-    friction = 0.7,
+    friction = 0.75,
     gravity = 0.5;
     var boxes = [];
 function createboundaries(){
@@ -81,7 +81,7 @@ if(level == 1){
         y: height-30,
         width: 10,
         height: 5
-    });    
+    });
     boxes.push({
         x: 40,
         y: height-50,
@@ -99,14 +99,14 @@ if(level == 1){
         y: height-100,
         width: 30,
         height: 5
-    }); 
+    });
         boxes.push({
             x: 90,
             y: 95,
             width: 1,
             height: 5
-        }); 
-    
+        });
+
 } else if (level == 2){
     newlevel();
     boxes.push({
@@ -114,6 +114,7 @@ if(level == 1){
         y: height-20,
         width: 20,
         height: 5
+<<<<<<< HEAD
     });   
     boxes.push({
         x: startlength+85,
@@ -133,11 +134,21 @@ if(level == 1){
         width: 10,
         height: 5
     });  
+=======
+    });
+        boxes.push({
+            x: startlength+85,
+            y: height-30,
+
+            width: 30,
+            height: 5
+        });
+>>>>>>> 00d0181dc55e8c2ff4e070d1ca075928328bbed1
     win.x = startlength+95;
     win.y = height-35;
-    
-    
-//    win.x = 10; 
+
+
+//    win.x = 10;
 
 }
 
@@ -151,14 +162,14 @@ canvas.height = height;
 
 
 function update() {
-    
+
     if( Math.round(player.x) == win.x  || player.x+5 > win.x > player.x-5 && player.y == win.y ){
         console.log("win");
-        
+
         checkobstacles(++gamelevel);
-        
+
     }
-            
+
     // check keys
     if (keys[38] || keys[32] || keys[87]) {
         // up arrow or space
@@ -187,11 +198,11 @@ function update() {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = "black";
     ctx.beginPath();
-    
+
     player.grounded = false;
     for (var i = 0; i < boxes.length; i++) {
         ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
-        
+
         var dir = colCheck(player, boxes[i]);
 
         if (dir === "l" || dir === "r") {
@@ -205,7 +216,7 @@ function update() {
         }
 
     }
-    
+
     if(player.grounded){
          player.velY = 0;
     }
@@ -216,13 +227,13 @@ function update() {
     ctx.fill();
     ctx.fillStyle = "red";
     ctx.fillRect(player.x, player.y, player.width, player.height);
-    
-    
+
+
     ctx.fillStyle = "blue";
     ctx.fillRect(win.x, win.y, player.width, player.height);
 
     requestAnimationFrame(update);
-    
+
     if(player.y >= 200){
         player.x = width / width + 20
         player.y =height - 15
