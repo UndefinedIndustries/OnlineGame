@@ -4,7 +4,7 @@
 })();
 var gamelevelx = 85;
 var gamelevely = 95;
-var gamelevel = 2;
+var gamelevel = 1;
 var startlength = 80;
 
 var canvas = document.getElementById("canvas"),
