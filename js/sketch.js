@@ -114,7 +114,7 @@ if(level == 1){
         y: height-20,
         width: 20,
         height: 5
-<<<<<<< HEAD
+
     });   
     boxes.push({
         x: startlength+85,
@@ -134,7 +134,7 @@ if(level == 1){
         width: 10,
         height: 5
     });  
-=======
+
     });
         boxes.push({
             x: startlength+85,
@@ -143,7 +143,7 @@ if(level == 1){
             width: 30,
             height: 5
         });
->>>>>>> 00d0181dc55e8c2ff4e070d1ca075928328bbed1
+
     win.x = startlength+95;
     win.y = height-35;
 
