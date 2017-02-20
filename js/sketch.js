@@ -77,7 +77,7 @@ boxes.push({
 boxes.push({
     x: 60,
     y: height-100,
-    width: 10,
+    width: 30,
     height: 5
 });
 
